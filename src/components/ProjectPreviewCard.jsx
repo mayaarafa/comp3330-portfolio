@@ -9,30 +9,21 @@ import {
 } from "@/components/ui/card";
 import { Skeleton } from "./ui/skeleton";
 import { Button } from "./ui/button";
+import Image from "next/image";
 import { TypographyH2, TypographyP } from "./ui/typography";
+import { createSlug } from "@/lib/utils";
 
-const projects = [
-  {
-    title: "Project One",
-    desc: "Long blurb. Long blurb. Long blurb. Long blurb. Long blurb. Long blurb. Long blurb. Long blurb. Long blurb.",
-    img: "https://placehold.co/300.png",
-    link: "#",
-  },
-  {
-    title: "Project Two",
-    desc: "Short blurb.",
-    img: "https://placehold.co/300.png",
-    link: "#",
-  },
-  {
-    title: "Project Three",
-    desc: "Short blurb.",
-    img: "https://placehold.co/300.png",
-    link: "#",
-  },
-];
+export default async function ProjectPreviewCard({ count = 6 }) {
+  const projects = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/projects`
+  )
+    .then((res) => res.json())
+    .then((data) => data.projects)
+    .catch((error) => {
+      console.error("Error fetching projects:", error);
+      return [];
+    });
 
-export default function ProjectPreviewCard({ count = 3 }) {
   return (
     <div className="flex flex-row flex-wrap gap-4 my-4 w-full justify-center items-stretch">
       {projects.slice(0, count).map((project, index) => (
@@ -42,12 +33,21 @@ export default function ProjectPreviewCard({ count = 3 }) {
         >
           <CardContent className={"flex flex-col gap-3 h-full justify-between"}>
             <div>
-              <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+              {project.img ? (
+                <Image
+                  width={125}
+                  height={250}
+                  alt={"project image"}
+                  className="rounded-xl"
+                />
+              ) : (
+                <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+              )}
               <TypographyH2>{project.title}</TypographyH2>
-              <TypographyP>{project.desc}</TypographyP>
+              <TypographyP>{project.description}</TypographyP>
             </div>
             <Button className={"w-full mt-4"}>
-              <a href={project.link}>See More</a>
+              <a href={`/projects/${createSlug(project.title)}`}>See More</a>
             </Button>
           </CardContent>
         </Card>

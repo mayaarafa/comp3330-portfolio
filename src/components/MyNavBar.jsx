@@ -10,10 +10,10 @@ import {
 export default function MyNavBar() {
   return (
     <NavigationMenu
-      className={"sticky top-0 inline-flex my-2"}
+      className={"sticky top-0 inline-flex my-2 bg-white z-1 p-1"}
       viewport={false}
     >
-      <NavigationMenuList className={"justify-start"}>
+      <NavigationMenuList className={"w-screen justify-center"}>
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
             <a href="/">Home</a>
@@ -21,12 +21,12 @@ export default function MyNavBar() {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
-            <a href="/">Projects</a>
+            <a href="/projects">Projects</a>
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Resume</NavigationMenuTrigger>
-          <NavigationMenuContent>
+          <NavigationMenuContent className={"absolute"}>
             <ul className="grid gap-2 p-2">
               <li>
                 <NavigationMenuLink asChild>
@@ -40,6 +40,11 @@ export default function MyNavBar() {
               </li>
             </ul>
           </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink asChild>
+            <a href="/projects/new">New Project</a>
+          </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuLink asChild>

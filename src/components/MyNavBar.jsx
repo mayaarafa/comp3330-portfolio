@@ -1,3 +1,5 @@
+"use client";
+
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -25,6 +27,11 @@ export default function MyNavBar() {
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
+          <NavigationMenuLink asChild>
+            <a href="/projects/new">New Project</a>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
           <NavigationMenuTrigger>Resume</NavigationMenuTrigger>
           <NavigationMenuContent className={"absolute"}>
             <ul className="grid gap-2 p-2">
@@ -40,11 +47,6 @@ export default function MyNavBar() {
               </li>
             </ul>
           </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuLink asChild>
-            <a href="/projects/new">New Project</a>
-          </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuLink asChild>

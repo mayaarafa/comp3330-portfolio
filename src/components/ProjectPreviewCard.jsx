@@ -44,7 +44,9 @@ export default async function ProjectPreviewCard({ count = 6 }) {
                 <Skeleton className="h-[125px] w-[250px] rounded-xl" />
               )}
               <TypographyH2>{project.title}</TypographyH2>
-              <TypographyP>{project.description}</TypographyP>
+              <TypographyP className={"mt-2"}>
+                {project.description}
+              </TypographyP>
             </div>
             <Button className={"w-full mt-4"}>
               <a href={`/projects/${createSlug(project.title)}`}>See More</a>

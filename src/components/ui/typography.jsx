@@ -1,6 +1,13 @@
-function TypographyH1({ children }) {
+import { cn } from "@/lib/utils";
+
+function TypographyH1({ children, className }) {
   return (
-    <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance pt-2">
+    <h1
+      className={cn(
+        "scroll-m-20 text-4xl font-extrabold tracking-tight text-balance pt-2",
+        className
+      )}
+    >
       {children}
     </h1>
   );
@@ -22,8 +29,8 @@ function TypographyH3({ children }) {
   );
 }
 
-function TypographyP({ children }) {
-  return <p className="leading-7 [&:not(:first-child)]:mt-6">{children}</p>;
+function TypographyP({ children, className }) {
+  return <p className={cn("leading-7", className)}>{children}</p>;
 }
 
 function TypographyMuted({ children }) {

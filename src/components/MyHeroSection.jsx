@@ -15,7 +15,9 @@ export function MyHero() {
         />
         <div>
           <TypographyH1>Maya Arafa's Portfolio</TypographyH1>
-          <TypographyP>Hello! Welcome to my portfolio website!</TypographyP>
+          <TypographyP className={"mt-2"}>
+            Hello! Welcome to my portfolio website!
+          </TypographyP>
         </div>
       </CardContent>
     </Card>

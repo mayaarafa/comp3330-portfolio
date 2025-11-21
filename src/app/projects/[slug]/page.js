@@ -2,6 +2,7 @@ import { TypographyH1, TypographyP } from "@/components/ui/typography";
 import { createSlug } from "@/lib/utils";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
+import { notFound } from "next/navigation";
 // import rest of components needed.
 
 export default async function ProjectDetailPage({ params }) {
@@ -18,6 +19,11 @@ export default async function ProjectDetailPage({ params }) {
     });
 
   const project = projects.find((proj) => createSlug(proj.title) === slug);
+
+  if (!project) {
+    notFound();
+  }
+
   return (
     <>
       {/* <div>My Post's slug: {slug}</div> */}

@@ -1,3 +1,4 @@
+"use client";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -6,12 +7,13 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { auth0 } from "@/lib/auth0";
 import Profile from "./Profile";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
-export default async function MyNavBar() {
-  const user = await auth0.getUser();
-  console.log("user:", user);
+export default function MyNavBar() {
+  const { user, isLoading } = useUser();
+
+  console.log("nav user:", user, "isLoading:", isLoading);
 
   return (
     <NavigationMenu
@@ -41,14 +43,14 @@ export default async function MyNavBar() {
             <a href="#">Resume</a>
           </NavigationMenuLink>
         </NavigationMenuItem>
-        {!user && (
+        {!user && !isLoading && (
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
               <a href="/contact">Contact</a>
             </NavigationMenuLink>
           </NavigationMenuItem>
         )}
-        {!user && (
+        {!user && !isLoading && (
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
               <a href="/auth/login">Log In</a>

@@ -11,6 +11,7 @@ import Profile from "./Profile";
 
 export default async function MyNavBar() {
   const user = await auth0.getUser();
+  console.log("user:", user);
 
   return (
     <NavigationMenu

@@ -2,7 +2,6 @@ import { TypographyH1, TypographyP } from "@/components/ui/typography";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { notFound } from "next/navigation";
-import { param } from "drizzle-orm";
 import DeleteProjectButton from "@/components/DeleteProjectButton";
 import EditProjectButton from "@/components/EditProjectButton";
 import { auth0 } from "@/lib/auth0";

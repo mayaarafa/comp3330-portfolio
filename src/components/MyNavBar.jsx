@@ -47,33 +47,34 @@ export default async function MyNavBar() {
             </NavigationMenuLink>
           </NavigationMenuItem>
         )}
-        <NavigationMenuItem>
-          {user ? (
-            <div>
-              <NavigationMenuTrigger>
-                <Profile user={user} />
-              </NavigationMenuTrigger>
-              <NavigationMenuContent className={"absolute"}>
-                <ul className="grid gap-2 p-2">
-                  <li>
-                    <NavigationMenuLink asChild>
-                      <a href="/dashboard">Dashboard</a>
-                    </NavigationMenuLink>
-                  </li>
-                  <li>
-                    <NavigationMenuLink asChild>
-                      <a href="/auth/logout">Log Out</a>
-                    </NavigationMenuLink>
-                  </li>
-                </ul>
-              </NavigationMenuContent>
-            </div>
-          ) : (
+        {!user && (
+          <NavigationMenuItem>
             <NavigationMenuLink asChild>
               <a href="/auth/login">Log In</a>
             </NavigationMenuLink>
-          )}
-        </NavigationMenuItem>
+          </NavigationMenuItem>
+        )}
+        {user && (
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>
+              <Profile user={user} />
+            </NavigationMenuTrigger>
+            <NavigationMenuContent className={"absolute"}>
+              <ul className="grid gap-2 p-2">
+                <li>
+                  <NavigationMenuLink asChild>
+                    <a href="/dashboard">Dashboard</a>
+                  </NavigationMenuLink>
+                </li>
+                <li>
+                  <NavigationMenuLink asChild>
+                    <a href="/auth/logout">Log Out</a>
+                  </NavigationMenuLink>
+                </li>
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        )}
       </NavigationMenuList>
     </NavigationMenu>
   );

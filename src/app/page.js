@@ -1,9 +1,9 @@
 // Default home page built by next.js
+"use client";
 
-import MyNavBar from "@/components/MyNavBar";
 import { MyHero } from "@/components/MyHeroSection";
 import ProjectPreviewCard from "@/components/ProjectPreviewCard";
-import Link from "next/link";
+import Profile from "@/components/Profile";
 import ContactForm from "@/components/contact-form";
 import GitHubCalendar from "@/components/github-calendar";
 

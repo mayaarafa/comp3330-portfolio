@@ -1,5 +1,3 @@
-"use client";
-
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -8,8 +6,13 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { auth0 } from "@/lib/auth0";
+import Profile from "./Profile";
 
-export default function MyNavBar() {
+export default async function MyNavBar() {
+  const session = await auth0.getSession();
+  const user = session?.user;
+
   return (
     <NavigationMenu
       className={"sticky top-0 inline-flex my-2 bg-white z-1 p-1"}
@@ -26,31 +29,50 @@ export default function MyNavBar() {
             <a href="/projects">Projects</a>
           </NavigationMenuLink>
         </NavigationMenuItem>
+        {user && (
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild>
+              <a href="/projects/new">New Project</a>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+        )}
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
-            <a href="/projects/new">New Project</a>
+            <a href="#">Resume</a>
           </NavigationMenuLink>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Resume</NavigationMenuTrigger>
-          <NavigationMenuContent className={"absolute"}>
-            <ul className="grid gap-2 p-2">
-              <li>
-                <NavigationMenuLink asChild>
-                  <a href="#">PDF</a>
-                </NavigationMenuLink>
-              </li>
-              <li>
-                <NavigationMenuLink asChild>
-                  <a href="#">LATEX</a>
-                </NavigationMenuLink>
-              </li>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
+        {!user && (
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild>
+              <a href="/contact">Contact</a>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+        )}
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
-            <a href="/">Login</a>
+            {user ? (
+              <div>
+                <NavigationMenuTrigger>
+                  <Profile />
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className={"absolute"}>
+                  <ul className="grid gap-2 p-2">
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <a href="/dashboard">Dashboard</a>
+                      </NavigationMenuLink>
+                    </li>
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <a href="/auth/logout">Log Out</a>
+                      </NavigationMenuLink>
+                    </li>
+                  </ul>
+                </NavigationMenuContent>
+              </div>
+            ) : (
+              <a href="/auth/login">Log In</a>
+            )}
           </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>

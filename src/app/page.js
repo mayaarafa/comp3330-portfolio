@@ -1,6 +1,3 @@
-// Default home page built by next.js
-"use client";
-
 import { MyHero } from "@/components/MyHeroSection";
 import ProjectPreviewCard from "@/components/ProjectPreviewCard";
 import Profile from "@/components/Profile";

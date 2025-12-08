@@ -11,6 +11,11 @@ class AppAuth0Client extends Auth0Client {
 
     return session;
   }
+
+  async getUser() {
+    const session = await this.getSession();
+    return session?.user ?? null;
+  }
 }
 
 export const auth0 = new AppAuth0Client();

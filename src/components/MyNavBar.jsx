@@ -10,8 +10,7 @@ import { auth0 } from "@/lib/auth0";
 import Profile from "./Profile";
 
 export default async function MyNavBar() {
-  const session = await auth0.getSession();
-  const user = session?.user;
+  const user = await auth0.getUser();
 
   return (
     <NavigationMenu

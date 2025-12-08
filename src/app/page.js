@@ -1,6 +1,5 @@
 import { MyHero } from "@/components/MyHeroSection";
 import ProjectPreviewCard from "@/components/ProjectPreviewCard";
-import Profile from "@/components/Profile";
 import ContactForm from "@/components/contact-form";
 import GitHubCalendar from "@/components/github-calendar";
 

@@ -1,50 +1,11 @@
-// GET /api/projects
-export async function GET() {
-  const projects = [
-    {
-      title: "Project One",
-      description:
-        "Long blurb. Long blurb. Long blurb. Long blurb. Long blurb. Long blurb. Long blurb. Long blurb. Long blurb.",
-      img: null,
-      link: "#",
-      keywords: [],
-    },
-    {
-      title: "Project Two",
-      description: "Short blurb.",
-      img: null,
-      link: "#",
-      keywords: [],
-    },
-    {
-      title: "Project Three",
-      description: "Short blurb.",
-      img: null,
-      link: "#",
-      keywords: [],
-    },
-    {
-      title: "Project Three",
-      description: "Short blurb.",
-      img: null,
-      link: "#",
-      keywords: [],
-    },
-    {
-      title: "Project Three",
-      description: "Short blurb.",
-      img: null,
-      link: "#",
-      keywords: [],
-    },
-    {
-      title: "Project Three",
-      description: "Short blurb.",
-      img: null,
-      link: "#",
-      keywords: [],
-    },
-  ];
+import { NextResponse } from "next/server";
+import { fetchProjects } from "@/lib/db";
 
-  return Response.json({ projects });
+export async function GET() {
+  const projects = await fetchProjects();
+
+  return NextResponse.json({
+    message: "Projects fetched",
+    projects: projects,
+  });
 }

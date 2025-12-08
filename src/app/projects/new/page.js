@@ -18,7 +18,8 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { TypographyH1 } from "@/components/ui/typography";
 import { toast } from "sonner";
-// Import rest of the components needed from shadcn/ui
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { redirect } from "next/navigation";
 
 const newProjectSchema = z.object({
   title: z.string().min(2, { message: "Your title is too short" }).max(200),
@@ -26,20 +27,34 @@ const newProjectSchema = z.object({
     .string()
     .min(10, { message: "Your description is too short" })
     .max(1000),
-  img: z.string().url({ message: "Please enter a valid URL for the image" }),
-  link: z.string().url({ message: "Please enter a valid URL for the link" }),
+  img: z
+    .string()
+    .url({ message: "Please enter a valid URL for the image" })
+    .or(z.literal(""))
+    .optional(),
+  link: z
+    .string()
+    .url({ message: "Please enter a valid URL for the link" })
+    .or(z.literal(""))
+    .optional(),
   keywords: z.array(z.string()).optional(),
 });
 
 export default function NewPage() {
+  const { user, isLoading } = useUser();
+
+  if (!isLoading && !user) {
+    redirect("/auth/login");
+  }
+
   const [draftKeyword, setDraftKeyword] = useState("");
   const form = useForm({
     resolver: zodResolver(newProjectSchema),
     defaultValues: {
-      title: "Write your project title here...",
-      description: "Write your project description here...",
-      img: "https://placehold.co/300.png",
-      link: "https://your-project-link.com",
+      title: "",
+      description: "",
+      img: "",
+      link: "",
       keywords: [],
     },
   });
@@ -55,7 +70,16 @@ export default function NewPage() {
     // TODO: create backend POST endpoint to handle new project creation
     const response = await fetch("/api/projects/new", {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: formData.get("title"),
+        description: formData.get("description"),
+        img: formData.get("img"),
+        link: formData.get("link"),
+        keywords: formData.getAll("keywords"),
+      }),
     }).catch((error) => {
       console.error("Error submitting new project: ", error);
     });
@@ -66,6 +90,7 @@ export default function NewPage() {
       throw new Error("There was an error at the new project submission");
     } else {
       toast.success("New Project is Received");
+      redirect("/");
     }
 
     // TODO: in future we will write the data to DB

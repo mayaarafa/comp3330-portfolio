@@ -119,9 +119,15 @@ export default function ContactForm({ className }) {
               </FormItem>
             )}
           />
-          <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Sending..." : "Submit"}
-          </Button>
+          <div className="w-full flex justify-center">
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className={"w-3xs mt-4"}
+            >
+              {isSubmitting ? "Sending..." : "Submit"}
+            </Button>
+          </div>
         </form>
       </Form>
     </div>

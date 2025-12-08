@@ -48,31 +48,31 @@ export default async function MyNavBar() {
           </NavigationMenuItem>
         )}
         <NavigationMenuItem>
-          <NavigationMenuLink asChild>
-            {user ? (
-              <div>
-                <NavigationMenuTrigger>
-                  <Profile user={user} />
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className={"absolute"}>
-                  <ul className="grid gap-2 p-2">
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <a href="/dashboard">Dashboard</a>
-                      </NavigationMenuLink>
-                    </li>
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <a href="/auth/logout">Log Out</a>
-                      </NavigationMenuLink>
-                    </li>
-                  </ul>
-                </NavigationMenuContent>
-              </div>
-            ) : (
+          {user ? (
+            <div>
+              <NavigationMenuTrigger>
+                <Profile user={user} />
+              </NavigationMenuTrigger>
+              <NavigationMenuContent className={"absolute"}>
+                <ul className="grid gap-2 p-2">
+                  <li>
+                    <NavigationMenuLink asChild>
+                      <a href="/dashboard">Dashboard</a>
+                    </NavigationMenuLink>
+                  </li>
+                  <li>
+                    <NavigationMenuLink asChild>
+                      <a href="/auth/logout">Log Out</a>
+                    </NavigationMenuLink>
+                  </li>
+                </ul>
+              </NavigationMenuContent>
+            </div>
+          ) : (
+            <NavigationMenuLink asChild>
               <a href="/auth/login">Log In</a>
-            )}
-          </NavigationMenuLink>
+            </NavigationMenuLink>
+          )}
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

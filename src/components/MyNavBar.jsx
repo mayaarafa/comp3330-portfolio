@@ -52,7 +52,7 @@ export default async function MyNavBar() {
             {user ? (
               <div>
                 <NavigationMenuTrigger>
-                  <Profile />
+                  <Profile user={user} />
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className={"absolute"}>
                   <ul className="grid gap-2 p-2">

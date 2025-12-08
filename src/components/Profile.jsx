@@ -2,17 +2,7 @@
 
 import { useUser } from "@auth0/nextjs-auth0/client";
 
-export default function Profile() {
-  const { user, isLoading } = useUser();
-
-  if (isLoading) {
-    return (
-      <div className="loading-state">
-        <div className="loading-text">Loading user profile...</div>
-      </div>
-    );
-  }
-
+export default function Profile({ user }) {
   if (!user) {
     return null;
   }

@@ -4,12 +4,17 @@ import ContactForm from "@/components/contact-form";
 import GitHubCalendar from "@/components/github-calendar";
 import { auth0 } from "@/lib/auth0";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
-  const session = await auth0.getSession();
+  // const session = await auth0.getSession();
+  const user = await auth0.getUser();
+
   return (
     <>
       <MyHero />
-      <ProjectPreviewCard user={session ? session.user : null} />
+      {/* <ProjectPreviewCard user={session ? session.user : null} /> */}
+      <ProjectPreviewCard user={user ?? null} />
       <GitHubCalendar username="mayaarafa" />
       <ContactForm className="w-[40%] mb-4" />
     </>

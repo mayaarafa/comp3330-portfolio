@@ -4,6 +4,8 @@ import ContactForm from "@/components/contact-form";
 import GitHubCalendar from "@/components/github-calendar";
 import { auth0 } from "@/lib/auth0";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const session = await auth0.getSession();
   return (

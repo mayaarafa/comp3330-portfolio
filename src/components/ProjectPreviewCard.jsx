@@ -18,8 +18,7 @@ import { useEffect, useState } from "react";
 import DeleteProjectButton from "./DeleteProjectButton";
 import EditProjectButton from "./EditProjectButton";
 
-export default function ProjectPreviewCard({ count = 6, redirectLink }) {
-  const { user, isLoading } = useUser();
+export default function ProjectPreviewCard({ count = 6, redirectLink, user }) {
   const [projects, setProjects] = useState([]);
   const [isProjectsLoading, setIsProjectsLoading] = useState(true);
 

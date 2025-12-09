@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import MyNavBar from "@/components/MyNavBar";
 import { Toaster } from "sonner";
+import { auth0 } from "@/lib/auth0";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,13 +19,14 @@ export const metadata = {
   description: "Portfolio website of Maya Arafa.",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await auth0.getSession();
   return (
     <html lang="en">
       <body
         className={`flex flex-col items-center mx-4 ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <MyNavBar />
+        <MyNavBar user={session ? session.user : null} />
         {children}
         <Toaster />
       </body>

@@ -8,13 +8,9 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import Profile from "./Profile";
-import { useUser } from "@auth0/nextjs-auth0/client";
+import { useUser } from "@auth0/nextjs-auth0";
 
-export default function MyNavBar() {
-  const { user, isLoading } = useUser();
-
-  console.log("nav user:", user, "isLoading:", isLoading);
-
+export default function MyNavBar({ user }) {
   return (
     <NavigationMenu
       className={"sticky top-0 inline-flex my-2 bg-white z-1 p-1"}
@@ -43,14 +39,14 @@ export default function MyNavBar() {
             <a href="#">Resume</a>
           </NavigationMenuLink>
         </NavigationMenuItem>
-        {!user && !isLoading && (
+        {!user && (
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
               <a href="/contact">Contact</a>
             </NavigationMenuLink>
           </NavigationMenuItem>
         )}
-        {!user && !isLoading && (
+        {!user && (
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
               <a href="/auth/login">Log In</a>
